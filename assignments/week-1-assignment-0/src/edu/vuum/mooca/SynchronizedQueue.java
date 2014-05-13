@@ -212,25 +212,31 @@ public class SynchronizedQueue {
     @SuppressWarnings("unused")
     public static SynchronizedQueueResult testQueue(QueueAdapter<Integer> queue) {
         try {
-            // TODO - you fill in here to replace the null
+            // you fill in here to replace the null
             // initialization below to create two Java Threads, one
             // that's passed the producerRunnable and the other that's
             // passed the consumerRunnable.
-            Thread consumer = null;
-            Thread producer = null;
+            Thread consumer = new Thread(consumerRunnable);
+            Thread producer = new Thread(producerRunnable);
 
-            // TODO - you fill in here to start the threads. More
+            // you fill in here to start the threads. More
             // interesting results will occur if you start the
             // consumer first.
+            consumer.start();
+            producer.start();
 
             // Give the Threads a chance to run before interrupting
             // them.
             Thread.sleep(100);
 
-            // TODO - you fill in here to interrupt the threads.
+            // you fill in here to interrupt the threads.
+            consumer.interrupt();
+            producer.interrupt();
 
-            // TODO - you fill in here to wait for the threads to
+            // you fill in here to wait for the threads to
             // exit.
+            consumer.join();
+            producer.join();
 
             // Do some sanity checking to see if the Threads work as
             // expected.
