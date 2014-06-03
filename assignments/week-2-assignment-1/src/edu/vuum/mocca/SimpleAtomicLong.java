@@ -1,4 +1,4 @@
-// Import the necessary Java synchronization and scheduling classes.
+package edu.vuum.mocca;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -20,6 +20,8 @@ class SimpleAtomicLong
     /**
      * The ReentrantReadWriteLock used to serialize access to mValue.
      */
+    // TODO -- you fill in here by replacing the null with an
+    // initialization of ReentrantReadWriteLock.
     private ReentrantReadWriteLock mRWLock = new ReentrantReadWriteLock();
 
     /**
@@ -27,6 +29,7 @@ class SimpleAtomicLong
      */
     public SimpleAtomicLong(long initialValue)
     {
+        // TODO -- you fill in here
     	this.mValue = initialValue;
     }
 
@@ -38,6 +41,8 @@ class SimpleAtomicLong
     public long get()
     {
         long value;
+
+        // TODO -- you fill in here
         mRWLock.readLock().lock();
         try {
         	value = mValue;
@@ -55,7 +60,9 @@ class SimpleAtomicLong
      */
     public long decrementAndGet()
     {
-        long value;
+    	long value = 0;
+
+    	// TODO -- you fill in here
         mRWLock.writeLock().lock();
         try {
         	mValue--;
@@ -74,7 +81,9 @@ class SimpleAtomicLong
      */
     public long getAndIncrement()
     {
-        long value;
+        long value = 0;
+
+        // TODO -- you fill in here    	
         mRWLock.writeLock().lock();
         try {
         	value = mValue;
@@ -93,7 +102,9 @@ class SimpleAtomicLong
      */
     public long getAndDecrement()
     {
-        long value;
+        long value = 0;
+
+        // TODO -- you fill in here
         mRWLock.writeLock().lock();
         try {
         	value = mValue;
@@ -112,7 +123,9 @@ class SimpleAtomicLong
      */
     public long incrementAndGet()
     {
-        long value;
+        long value = 0;
+
+        // TODO -- you fill in here
         mRWLock.writeLock().lock();
         try {
         	mValue++;

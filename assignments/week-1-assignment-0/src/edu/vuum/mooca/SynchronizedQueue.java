@@ -1,5 +1,4 @@
 package edu.vuum.mooca;
-import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -40,7 +39,7 @@ public class SynchronizedQueue {
      * @brief Enumerated type for return values of testing logic, has
      *       String for easy output.
      */
-    public enum SynchronizedQueueResult {
+   public enum SynchronizedQueueResult {
         RAN_PROPERLY("Threads Ran Properly."), 
         JOIN_NEVER_CALLED("Join() never called."),
         THREADS_NEVER_RAN("Threads never ran."),
@@ -128,7 +127,7 @@ public class SynchronizedQueue {
      * Adapter object used to test different BlockingQueue
      * implementations.
      */
-    public static QueueAdapter<Integer> mQueue = null;
+    private static QueueAdapter<Integer> mQueue = null;
 
     /**
      * This runnable loops for mMaxIterations and calls put() on
@@ -187,7 +186,7 @@ public class SynchronizedQueue {
                         System.out.println("Exception " + e.toString()
                                            + " occurred in consumerRunnable");
                         // Indicate a timeout.
-                        mProducerCounter = TIMEOUT_OCCURRED;
+                        mConsumerCounter = TIMEOUT_OCCURRED;
                         return;
                     } catch (Exception e) {
                         System.out.println("Exception " + e.toString()
@@ -200,19 +199,22 @@ public class SynchronizedQueue {
 	};
 
     /**
-     * Number of iterations to test (the actual test shouldn't run this many
-     * iterations since the Threads ought to be interrupted long before it gets
-     * this far).
+     * Number of iterations to test (the actual test shouldn't run
+     * this many iterations since the Threads ought to be interrupted
+     * long before it gets this far).
      */
     public static int mMaxIterations = 1000000;
 
     /**
      * Run the test for the queue parameter.
      */
-    @SuppressWarnings("unused")
     public static SynchronizedQueueResult testQueue(QueueAdapter<Integer> queue) {
         try {
+
             // you fill in here to replace the null
+            mQueue = queue;
+
+
             // initialization below to create two Java Threads, one
             // that's passed the producerRunnable and the other that's
             // passed the consumerRunnable.
@@ -224,6 +226,7 @@ public class SynchronizedQueue {
             // consumer first.
             consumer.start();
             producer.start();
+
 
             // Give the Threads a chance to run before interrupting
             // them.
@@ -237,6 +240,7 @@ public class SynchronizedQueue {
             // exit.
             consumer.join();
             producer.join();
+
 
             // Do some sanity checking to see if the Threads work as
             // expected.
